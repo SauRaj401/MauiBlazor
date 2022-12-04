@@ -1,0 +1,49 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+<label>Enter item:</label>
+<input type="text" @bind='keyText' placeholder="Key" />
+<input type="text" @bind='valueText' placeholder="Value" />
+<button @onclick="AddItem"> Add Item</button>
+<button @onclick="ClearCollection"> Clear Items</button>
+<button @onclick="RemoveLastItem"> Remove Last Item</button>
+
+<br />
+
+<label><b>Collection Items:</b></label>
+<br />
+@foreach(string s in myList.Keys)
+{
+    <label>@s @myList[@s]</label><br />
+}
+
+@code
+{
+    string keyText;
+    string valueText;
+
+    //List<string> myList = new List<string>();
+    //Stack<string> myList = new Stack<string>(); 
+    Dictionary<string, string> myList = new Dictionary<string, string>();
+
+    public void AddItem()
+    {
+        if (keyText == "" || keyText == null) return;
+        if (valueText == "" || valueText == null) return;
+        //myList.Add(itemText);
+        myList.Add(keyText, valueText);
+        keyText = "";
+        valueText = "";
+    }
+    public void ClearCollection()
+    {
+        myList.Clear();
+
+    }
+    public void RemoveLastItem()
+    {
+       // myList.RemoveAt(myList.Count - 1);
+        //myList.Pop();
+    }
+}
